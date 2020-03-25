@@ -339,6 +339,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclePrefab: {fileID: 2465561295147256064, guid: 86c99cafeef83044591176ce106ec728,
     type: 3}
+  bgCratePrefab: {fileID: 1246771378368072596, guid: 316be959c21a8cb4594fbe395c214f93,
+    type: 3}
 --- !u!1 &835818919
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +352,8 @@ GameObject:
   - component: {fileID: 835818921}
   - component: {fileID: 835818920}
   - component: {fileID: 835818922}
+  - component: {fileID: 835818924}
+  - component: {fileID: 835818923}
   m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
@@ -433,6 +437,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
+--- !u!65 &835818923
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835818919}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 112.79999, y: 18.836718, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &835818924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835818919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51352c091f7de3a41bacd665c3d1a830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repeatSize: 0
 --- !u!1001 &1626287485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -442,7 +472,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100046, guid: f8abbdd178867d2419ba9feb6ff2cba0, type: 3}
       propertyPath: m_Name
-      value: SimpleFarmer_Black
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 400038, guid: f8abbdd178867d2419ba9feb6ff2cba0, type: 3}
       propertyPath: m_LocalRotation.y
@@ -524,9 +554,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88b6de1cc77eb94e9785e9502584218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 10
-  gravityMultiplier: 5
+  forceMultiplier: 25
+  gravityMultiplier: 10
   onGround: 1
+  gameOver: 0
 --- !u!65 &1626287488
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -570,7 +601,7 @@ GameObject:
   - component: {fileID: 2014335012}
   m_Layer: 9
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
