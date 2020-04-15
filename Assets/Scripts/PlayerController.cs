@@ -6,6 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRigidbody;
     private Animator playerAnim;
+    public ParticleSystem obstacleExplosion;
+    public ParticleSystem dirtSplatt;
+    public AudioClip jumpSound;
+    public AudioClip explosionSound;
+    private AudioSource audioSource;
     public float forceMultiplier;
     public float gravityMultiplier;
     public bool isOnGround = true;
@@ -15,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         Physics.gravity *= gravityMultiplier;
     }
 
@@ -25,7 +31,9 @@ public class PlayerController : MonoBehaviour
         {
             playerRigidbody.AddForce(Vector3.up * forceMultiplier, ForceMode.Impulse);
             isOnGround = false;
+            dirtSplatt.Stop();
             playerAnim.SetTrigger("Jump_trig");
+            audioSource.PlayOneShot(jumpSound, 1.0f);
         }
     }
 
@@ -34,16 +42,20 @@ public class PlayerController : MonoBehaviour
         // game over if the player hits an obstacle
         if(collision.gameObject.CompareTag("Obstacle"))
         {
+            dirtSplatt.Stop();
             gameOver = true;
+            obstacleExplosion.Play();
             isOnGround = false;
             Debug.Log("Game Over!");
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
+            audioSource.PlayOneShot(explosionSound, 1.0f);
         }
         // set on ground state to true if we hit the ground
-        else if (collision.gameObject.CompareTag("Ground"))
+        else if (collision.gameObject.CompareTag("Ground") && !gameOver)
         {
             isOnGround = true;
+            dirtSplatt.Play();
         }
 
     }
